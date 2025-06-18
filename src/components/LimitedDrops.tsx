@@ -13,19 +13,19 @@ import { useUIStore } from '../store/uiStore';
 const ArrowButton = ({ onClick, left }: { onClick?: () => void; left?: boolean }) => {
   const { isDarkTheme } = useUIStore();
   return (
-    <button
-      onClick={onClick}
+  <button
+    onClick={onClick}
       className={`p-3 rounded-full shadow-sm transition-colors duration-200 ${
         isDarkTheme
           ? 'bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-primary'
           : 'bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-primary'
       }`}
-      aria-label={left ? 'Previous' : 'Next'}
-      type="button"
-    >
-      {left ? <FaChevronLeft size={14} /> : <FaChevronRight size={14} />}
-    </button>
-  );
+    aria-label={left ? 'Previous' : 'Next'}
+    type="button"
+  >
+    {left ? <FaChevronLeft size={14} /> : <FaChevronRight size={14} />}
+  </button>
+);
 };
 
 const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
@@ -39,8 +39,8 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
   const { isDarkTheme } = useUIStore();
   
   // Create front and back image paths
-  const frontImage = 'public/assets/products/e30_2.jpg';
-  const backImage = 'public/assets/products/e30_3.jpg';
+  const frontImage = '/assets/products/e30_2.jpg';
+  const backImage = '/assets/products/e30_3.jpg';
 
   useEffect(() => {
     const card = cardRef.current;

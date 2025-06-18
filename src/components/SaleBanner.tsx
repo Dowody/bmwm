@@ -17,7 +17,7 @@ const SaleBanner = () => {
           playsInline
           className="w-full h-[calc(100%+90px)] object-cover transform -translate-y-20"
         >
-          <source src="/videoplayback2.mp4" type="video/mp4" />
+          <source src="videoplayback2.mp4" type="video/mp4" />
         </video>
       </div>
 
