@@ -39,8 +39,8 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
   const { isDarkTheme } = useUIStore();
   
   // Create front and back image paths
-  const frontImage = '/assets/products/e30_2.jpg';
-  const backImage = '/assets/products/e30_3.jpg';
+  const frontImage = 'assets/products/e30_2.jpg';
+  const backImage = 'assets/products/e30_3.jpg';
 
   useEffect(() => {
     const card = cardRef.current;
