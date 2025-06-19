@@ -86,13 +86,18 @@ const MainNavbar = () => {
               {/* Commented out to keep navigation on homepage */}
               {/* <Link to="/" className="flex items-center group"> */}
               <div className={`flex items-center group cursor-pointer ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>
-                <motion.h1 
-                  className={`text-3xl font-bold font-rajdhani ${isDarkTheme ? 'text-white' : ''}`}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  PURE<span className="text-primary group-hover:text-primary/80 transition-colors duration-300">BMWM</span>
-                </motion.h1>
+                <div>
+                  <motion.h1 
+                    className={`text-3xl font-bold font-owned ${isDarkTheme ? 'text-white' : ''}`}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    PURE<span className="text-primary group-hover:text-primary/80 transition-colors duration-300">BMWM</span>
+                  </motion.h1>
+                  <p className={`text-[0.65rem] font-medium tracking-wider ${isDarkTheme ? 'text-white/70' : 'text-gray-600'}`}>
+                    DREAM. BUY. BUILD.
+                  </p>
+                </div>
               </div>
               {/* </Link> */}
 
@@ -208,13 +213,19 @@ const MainNavbar = () => {
                   <input
                     type="text"
                     placeholder="I'm looking for..."
-                    className="bg-gray-100 rounded-full py-2 pl-4 pr-10 w-64 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all duration-300"
+                    className={`backdrop-blur-md border border-gray-200/50 rounded-full py-2 pl-4 pr-10 w-64 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 transition-all duration-300 ${
+                      isDarkTheme 
+                        ? 'text-white placeholder-gray-400 border-gray-600/50 focus:border-gray-500/50 bg-gray-800/30' 
+                        : 'text-gray-900 placeholder-gray-500 bg-gray-50/50'
+                    }`}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                   <motion.button 
                     type="submit" 
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-primary"
+                    className={`absolute right-3 top-1/2 transform -translate-y-1/2 ${
+                      isDarkTheme ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-primary'
+                    }`}
                   >
                     <FiSearch size={18} />
                   </motion.button>

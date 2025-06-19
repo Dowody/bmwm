@@ -92,10 +92,21 @@ const FeatureSection = () => {
   };
 
   return (
-    <section className={`py-20 px-4 overflow-visible transition-colors duration-300 ${
+    <section className={`py-20 px-4 overflow-visible transition-colors duration-300 relative ${
       isDarkTheme ? 'bg-[#16171E]' : 'bg-[#F9FAFB]'
     }`}>
-      <div className="container mx-auto max-w-7xl overflow-visible">
+      {/* Street background with overlay for dark theme */}
+      {isDarkTheme && (
+        <>
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: 'url(/assets/bg1.jpg)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/75 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-transparent" />
+        </>
+      )}
+      <div className="container mx-auto max-w-7xl overflow-visible relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <motion.h2 

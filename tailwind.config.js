@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        owned: ['Owned', 'sans-serif'],
         bebasneue: ['Bebas Neue', 'sans-serif'],
         rajdhani: ['Rajdhani', 'sans-serif'],
         montserrat: ['Montserrat', 'sans-sans-serif'],

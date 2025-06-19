@@ -84,13 +84,18 @@ const HeroNavbar = () => {
           {/* Commented out to keep navigation on homepage */}
           {/* <Link to="/" className="flex items-center group"> */}
           <div className="flex items-center group cursor-pointer">
-            <motion.h1 
-              className={`text-3xl font-bold font-rajdhani ${!isContentVisible ? 'text-white' : (isDarkTheme ? 'text-white' : 'text-gray-900')}`}
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              PURE<span className={`${!isContentVisible ? 'text-white' : 'text-primary'} group-hover:text-primary/80 transition-colors duration-300`}>BMWM</span>
-            </motion.h1>
+            <div>
+              <motion.h1 
+                className={`text-3xl font-bold font-owned ${!isContentVisible ? 'text-white' : (isDarkTheme ? 'text-white' : 'text-gray-900')}`}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                PURE<span className={`${!isContentVisible ? 'text-white' : 'text-primary'} group-hover:text-primary/80 transition-colors duration-300`}>BMWM</span>
+              </motion.h1>
+              <p className={`text-[0.65rem] font-medium tracking-wider ${!isContentVisible ? 'text-white/70' : (isDarkTheme ? 'text-white/70' : 'text-gray-600')}`}>
+                DREAM. BUY. BUILD.
+              </p>
+            </div>
           </div>
           {/* </Link> */}
 

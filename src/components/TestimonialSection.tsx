@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
 import { HiStar } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const ArrowButton = ({ onClick, left, isDarkTheme }: { onClick?: () => void; left?: boolean; isDarkTheme: boolean }) => (
   <button
@@ -121,7 +122,6 @@ const TestimonialCard = ({ review, idx, isDarkTheme }: { review: any; idx: numbe
                     <div className={`text-sm font-bold transition-colors duration-200 truncate cursor-pointer ${isDarkTheme ? 'text-white hover:text-primary' : 'text-gray-900 hover:text-primary'}`}>
                       {product.name}
                     </div>
-                    <p className={`text-xs font-medium ${isDarkTheme ? 'text-gray-400' : 'text-gray-500'}`}>€{product.price.toLocaleString('en-EU', { minimumFractionDigits: 2 })}</p>
                   </div>
                 </div>
               </div>
@@ -210,10 +210,28 @@ const TestimonialSection = () => {
   };
 
   return (
-    <section className={`py-16 px-4 transition-colors duration-300 ${
+    <section className={`py-16 px-4 transition-colors duration-300 relative ${
       isDarkTheme ? 'bg-[#16171E] text-white' : 'bg-[#F9FAFB] text-gray-900'
     }`}>
-      <div className="container mx-auto max-w-7xl">
+      {/* Street background with overlay for dark theme */}
+      {isDarkTheme && (
+        <>
+          <motion.div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ 
+              backgroundImage: 'url(/assets/bg2.jpg)', 
+              backgroundPosition: window.innerWidth < 768 ? 'center center' : 'center -900px',
+              backgroundSize: 'cover'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/75 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-transparent" />
+        </>
+      )}
+      <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div>

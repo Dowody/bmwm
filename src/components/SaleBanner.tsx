@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import CountdownTimer from './CountdownTimer';
+import { motion } from 'framer-motion';
 
 const SaleBanner = () => {
   // Set the sale end date to 7 days from now
@@ -7,18 +8,21 @@ const SaleBanner = () => {
   saleEndDate.setDate(saleEndDate.getDate() + 7);
 
   return (
-    <section className="relative py-20 text-white overflow-hidden">
+    <section className="relative py-20 text-white overflow-hidden border-t border-b border-gray-800">
       {/* Video Background */}
       <div className="absolute inset-0">
-        <video
+        <motion.video
           autoPlay
           muted
           loop
           playsInline
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
           className="w-full h-[calc(100%+90px)] object-cover transform -translate-y-20"
         >
           <source src="videoplayback2.mp4" type="video/mp4" />
-        </video>
+        </motion.video>
       </div>
 
       {/* Gradient Overlay with reduced opacity */}

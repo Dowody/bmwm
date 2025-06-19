@@ -27,7 +27,8 @@ const Footer = () => {
           >
             <div className="space-y-8">
               <div>
-                <h3 className="text-4xl font-bold mb-4 font-Rajdhani tracking-wide">PURE<span className="text-primary">BMWM</span></h3>
+                <h3 className="text-4xl font-bold mb-2 font-owned tracking-wide">PURE<span className="text-primary">BMWM</span></h3>
+                <p className="text-gray-400 text-sm font-medium tracking-wider mb-4">DREAM. BUY. BUILD.</p>
                 <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
                   Premium quality cotton hoodies and t-shirts for car enthusiasts. Starting at just $24.99.
                 </p>

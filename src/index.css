@@ -1,3 +1,5 @@
+@import './fonts.css';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -163,4 +165,18 @@ h1, h2, h3, h4, h5, h6 {
   100% {
     transform: translateX(-50%) scaleX(1);
   }
+}
+
+/* Info Roller Animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
 }

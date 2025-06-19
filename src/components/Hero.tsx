@@ -112,17 +112,20 @@ const Hero = () => {
   return (
     <div className="relative bg-black text-white overflow-hidden">
       <Announcement />
-      <video
+      <motion.video
         ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
         className="absolute inset-0 w-full h-full object-cover opacity-50 scale-150 md:scale-125"
         >
         <source src="videoplayback.mp4" type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
+      </motion.video>
 
       {/* Mobile Search Bar - Moved to top */}
       <motion.form 
@@ -214,7 +217,7 @@ const Hero = () => {
           transition={{ duration: 0.5 }}
           className="text-center relative bottom-20 top-0 lg:bottom-0"
         >
-          <h1 className="text-4xl md:text-7xl font-bold mb-4 font-bebasneue">Welcome to PUREBMWM</h1>
+          <h1 className="text-4xl md:text-7xl font-bold mb-4 font-bebasneue">Welcome to PURE.BMWM</h1>
           <p className="text-xl mb-8">Discover the latest in car-inspired merch.</p>
           <div className="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center items-center">
             {/* Commented out to keep navigation on homepage */}

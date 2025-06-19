@@ -1,0 +1,20 @@
+/* Custom Fonts */
+@font-face {
+  font-family: 'Owned';
+  src: url('/assets/fonts/Owned.woff2') format('woff2'),
+       url('/assets/fonts/Owned.woff') format('woff'),
+       url('/assets/fonts/Owned.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Owned';
+  src: url('/assets/fonts/Owned-Bold.woff2') format('woff2'),
+       url('/assets/fonts/Owned-Bold.woff') format('woff'),
+       url('/assets/fonts/Owned-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+} 

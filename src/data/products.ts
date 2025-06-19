@@ -88,7 +88,7 @@ export const products: Product[] = [
   },
   {
     id: '6',
-    name: 'Berry Purple GT3 RS - Limited',
+    name: 'Berry Purple GT3 RS',
     description: 'Limited edition berry purple t-shirt featuring the iconic 911 GT3 RS design. Only 100 pieces available worldwide.',
     price: 49.99,
     originalPrice: 79.99,
