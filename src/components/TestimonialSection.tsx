@@ -73,7 +73,7 @@ const TestimonialCard = ({ review, idx, isDarkTheme }: { review: any; idx: numbe
   }, []);
 
   return (
-    <div className="px-0 pt-4 pb-10">
+    <div className="px-0 pt-10 pb-10">
       <div className="flex flex-col group">
         {/* Testimonial card with 3D effect */}
         <div 

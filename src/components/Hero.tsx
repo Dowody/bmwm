@@ -126,6 +126,9 @@ const Hero = () => {
         Your browser does not support the video tag.
       </motion.video>
 
+      {/* Black overlay over video */}
+      <div className="absolute inset-0 bg-black/40 z-10"></div>
+
       {/* Mobile Search Bar - Moved to top */}
       <motion.form 
         onSubmit={handleSearch} 

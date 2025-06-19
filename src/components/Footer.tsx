@@ -26,7 +26,7 @@ const Footer = () => {
           >
             <div className="space-y-8">
               <div>
-                <h3 className="text-4xl font-bold mb-2 font-owned tracking-wide">PURE<span className="text-primary">BMWM</span></h3>
+                <h3 className="text-4xl font-bold mb-2 font-owned tracking-wide">PURE.<span className="text-primary">BMWM</span></h3>
                 <p className="text-gray-400 text-sm font-medium tracking-wider mb-4">DREAM. BUY. BUILD.</p>
                 <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
                   Premium quality cotton hoodies and t-shirts for car enthusiasts. Starting at just $24.99.
@@ -176,7 +176,7 @@ const Footer = () => {
         >
           <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 mb-4 md:mb-0">
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} PUREBMWM. All rights reserved.
+              © {new Date().getFullYear()} PURE.BMWM. All rights reserved.
             </p>
             <div className="flex space-x-6">
               {/* Commented out to keep navigation on homepage */}

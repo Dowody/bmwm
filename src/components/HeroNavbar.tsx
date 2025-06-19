@@ -90,7 +90,7 @@ const HeroNavbar = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                PURE<span className={`${!isContentVisible ? 'text-white' : 'text-primary'} group-hover:text-primary/80 transition-colors duration-300`}>BMWM</span>
+                PURE.<span className={`${!isContentVisible ? 'text-white' : 'text-primary'} group-hover:text-primary/80 transition-colors duration-300`}>BMWM</span>
               </motion.h1>
               <p className={`text-[0.65rem] font-medium tracking-wider ${!isContentVisible ? 'text-white/70' : (isDarkTheme ? 'text-white/70' : 'text-gray-600')}`}>
                 DREAM. BUY. BUILD.
