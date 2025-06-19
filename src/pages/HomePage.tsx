@@ -2,7 +2,7 @@ import Hero from '../components/Hero';
 import LimitedDrops from '../components/LimitedDrops';
 import InfoRoller from '../components/InfoRoller';
 import ProductComparer from '../components/ProductComparer';
-import CategorySection from '../components/CategorySection';
+// import CategorySection from '../components/CategorySection';
 import FeaturedProducts from '../components/FeaturedProducts';
 import SaleBanner from '../components/SaleBanner';
 import FeaturesAndFAQ from '../components/FeaturesAndFAQ';
@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div>
       <Hero />
-      <CategorySection />
+      {/* <CategorySection /> */}
       <LimitedDrops />
       <InfoRoller />
       <TestimonialSection />

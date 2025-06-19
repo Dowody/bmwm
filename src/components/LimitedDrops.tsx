@@ -10,6 +10,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useCartStore } from '../store/cartStore';
 import { useUIStore } from '../store/uiStore';
 import { motion } from 'framer-motion';
+import CategorySlider from './CategorySlider';
 
 const ArrowButton = ({ onClick, left }: { onClick?: () => void; left?: boolean }) => {
   const { isDarkTheme } = useUIStore();
@@ -366,29 +367,40 @@ const LimitedDrops = () => {
   };
 
   return (
-    <section className={`py-16 px-4 transition-colors duration-300 relative ${
+    <section className={`py-16 px-4 transition-colors duration-300 relative overflow-hidden ${
       isDarkTheme ? 'bg-[#16171E] text-white' : 'bg-[#F9FAFB] text-gray-900'
     }`}>
-      {/* Street background with overlay for dark theme */}
-      {isDarkTheme && (
-        <>
-          <motion.div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ 
-              backgroundImage: 'url(assets/bg1.jpg)', 
-              backgroundPosition: window.innerWidth < 768 ? 'center center' : 'center -300px',
-              backgroundSize: 'cover'
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/75 to-black/70" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-transparent" />
-        </>
-      )}
+      {/* Street background - always visible */}
+      <motion.div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: 'url(assets/bg1.jpg)', 
+          backgroundPosition: window.innerWidth < 768 ? 'center center' : 'center 00px',
+          backgroundSize: 'cover',
+          minHeight: '100%',
+          width: '100%'
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+      />
+      
+      {/* Overlay for better text readability */}
+      <div className={`absolute inset-0 ${
+        isDarkTheme 
+          ? 'bg-gradient-to-b from-black/80 via-black/75 to-black/70' 
+          : 'bg-white/60 backdrop-blur-sm'
+      }`} />
+      <div className={`absolute inset-0 ${
+        isDarkTheme 
+          ? 'bg-gradient-to-r from-transparent via-black/20 to-transparent' 
+          : 'bg-gradient-to-r from-transparent via-white/20 to-transparent'
+      }`} />
+      
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header */}
+          {/* Category Slider */}
+          <CategorySlider />
         <div className="flex items-center justify-between mb-12">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold font-bebasneue mb-2">
@@ -405,6 +417,8 @@ const LimitedDrops = () => {
             <ArrowButton onClick={() => sliderRef.current?.slickNext()} />
           </div>
         </div>
+        
+      
         
         <div ref={sliderContainerRef} className="overflow-visible">
           <Slider ref={sliderRef} {...sliderSettings} className="editorial-slider overflow-visible">
