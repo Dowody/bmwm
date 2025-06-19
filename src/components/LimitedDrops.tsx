@@ -375,7 +375,7 @@ const LimitedDrops = () => {
           <motion.div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ 
-              backgroundImage: 'url(/assets/bg1.jpg)', 
+              backgroundImage: 'url(assets/bg1.jpg)', 
               backgroundPosition: window.innerWidth < 768 ? 'center center' : 'center -300px',
               backgroundSize: 'cover'
             }}

@@ -1,7 +1,7 @@
 import { FaShieldAlt, FaHeadset, FaShippingFast, FaCreditCard } from 'react-icons/fa';
 import { SiVisa, SiMastercard, SiPaypal } from 'react-icons/si';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { useUIStore } from '../store/uiStore';
 
@@ -132,7 +132,7 @@ const FeaturesAndFAQ = () => {
         <>
           <motion.div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: 'url(/assets/bg3.jpg)' }}
+            style={{ backgroundImage: 'url(assets/bg3.jpg)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}

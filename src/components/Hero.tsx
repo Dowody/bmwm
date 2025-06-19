@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { FiSearch } from 'react-icons/fi';
@@ -14,7 +13,7 @@ const Hero = () => {
   const controls = useAnimation();
   const lastScrollTime = useRef(Date.now());
   const fadeTimeout = useRef<NodeJS.Timeout>();
-  const { setContentVisible, isContentVisible } = useUIStore();
+  const { setContentVisible} = useUIStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Listen for menu state changes

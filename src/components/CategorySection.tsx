@@ -1,5 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { useUIStore } from '../store/uiStore';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -132,13 +131,7 @@ const CategorySection = () => {
     }
   ];
 
-  const getSlidesToShow = () => {
-    if (window.innerWidth >= 1024) return 5;
-    if (window.innerWidth >= 768) return 4;
-    return 2;
-  };
 
-  const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {
     if (sliderRef.current) {

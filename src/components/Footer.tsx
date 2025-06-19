@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
 import { FiInstagram, FiTwitter, FiFacebook, FiMail, FiPhone, FiArrowRight, FiMapPin } from 'react-icons/fi';
 import { motion } from 'framer-motion';
-import { SiVisa, SiMastercard, SiPaypal, SiAmericanexpress } from 'react-icons/si';
+import { SiVisa, SiMastercard, SiPaypal } from 'react-icons/si';
 
 const Footer = () => {
   return (
