@@ -125,9 +125,7 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Commented out to keep navigation on homepage */}
-          {/* <Link to={`/products/${product.id}`} className="block w-full h-full relative overflow-hidden rounded-2xl"> */}
-          <div className="block w-full h-full relative overflow-hidden rounded-2xl cursor-pointer">
+          <Link to={`/products/${product.id}`} className="block w-full h-full relative overflow-hidden rounded-2xl">
             {/* Front Image */}
             <img
               src={frontImage}
@@ -146,8 +144,7 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
               }`}
               loading="lazy"
             />
-          </div>
-          {/* </Link> */}
+          </Link>
           
           {/* Cart Button - appears on hover - outside Link to avoid conflicts */}
           <div className={`absolute top-4 right-4 z-10 transition-all duration-300 ${
@@ -198,66 +195,37 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
         {/* Product Info */}
         <div className="pt-6 space-y-3">
           <div className="flex items-center justify-between">
-            <p className={`text-sm font-medium tracking-wide ${
-              isDarkTheme ? 'text-gray-400' : 'text-gray-500'
-            }`}>
-              {product.category}
-            </p>
-            <div className="flex items-center space-x-1">
-              {[...Array(5)].map((_, starIdx) => (
-                <span
-                  key={starIdx}
-                  className={`text-xs ${starIdx < 4 ? 'text-yellow-400' : (isDarkTheme ? 'text-gray-600' : 'text-gray-300')}`}
-                >
-                  ★
-                </span>
-              ))}
-              <span className={`text-xs ml-1 font-medium ${
-                isDarkTheme ? 'text-gray-500' : 'text-gray-400'
-              }`}>(4.0)</span>
-            </div>
-          </div>
-          
-          {/* Commented out to keep navigation on homepage */}
-          {/* <Link to={`/products/${product.id}`} className="block"> */}
-          <div className="block cursor-pointer">
-            <h3 className={`font-bold text-lg transition-colors truncate ${
-              isDarkTheme ? 'text-white hover:text-gray-300' : 'text-gray-900 hover:text-gray-700'
-            }`}>
-              {product.name}
-            </h3>
-          </div>
-          {/* </Link> */}
-          
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <p className={`font-bold text-xl ${
-                isDarkTheme ? 'text-white' : 'text-gray-900'
+            <Link to={`/products/${product.id}`} className="block">
+              <h3 className={`font-bold text-lg transition-colors truncate ${
+                isDarkTheme ? 'text-white hover:text-primary' : 'text-gray-900 hover:text-primary'
               }`}>
-                €{product.price.toLocaleString('en-EU', { minimumFractionDigits: 2 })}
-              </p>
+                {product.name}
+              </h3>
+            </Link>
+            
+            <div className="flex items-center">
+              <span className={`font-bold text-lg ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>
+                ${product.price.toFixed(2)}
+              </span>
               {product.originalPrice && (
-                <p className={`text-sm line-through ${
-                  isDarkTheme ? 'text-gray-500' : 'text-gray-400'
-                }`}>
-                  €{product.originalPrice.toLocaleString('en-EU', { minimumFractionDigits: 2 })}
-                </p>
+                <span className={`ml-2 text-sm line-through ${isDarkTheme ? 'text-gray-400' : 'text-gray-500'}`}>
+                  ${product.originalPrice.toFixed(2)}
+                </span>
               )}
             </div>
+          </div>
+          
+          <div className="flex items-center justify-between">
+            <p className={`text-sm ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}>
+              {product.category}
+            </p>
             
-            {/* Add to cart button - commented out link, kept as button */}
-            {/* <Link
+            <Link
               to={`/products/${product.id}`}
               className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded-full transition-colors duration-200 text-sm"
             >
               BUY
-            </Link> */}
-            <button
-              className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded-full transition-colors duration-200 text-sm"
-              onClick={() => console.log('Buy clicked for:', product.name)}
-            >
-              BUY
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -409,8 +377,8 @@ const FeaturedProducts = ({ title, subtitle, products, background = 'light', lay
           </div>
         )}
 
-        {/* Minimal CTA Section - commented out to keep navigation on homepage */}
-        {/* <div className="mt-12 flex justify-center">
+        {/* Minimal CTA Section */}
+        <div className="mt-12 flex justify-center">
           <Link
             to="/products"
             className="group inline-flex items-center space-x-2 text-gray-700 hover:text-primary font-medium transition-colors duration-200"
@@ -425,24 +393,6 @@ const FeaturedProducts = ({ title, subtitle, products, background = 'light', lay
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
-        </div> */}
-        <div className="mt-12 flex justify-center">
-          <button
-            className={`group inline-flex items-center space-x-2 font-medium transition-colors duration-200 hover:text-primary ${
-              isDarkTheme ? 'text-gray-300' : 'text-gray-700'
-            }`}
-            onClick={() => console.log('View All Products clicked')}
-          >
-            <span className="text-lg tracking-wide">View All Products</span>
-            <svg 
-              className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-200" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </button>
         </div>
       </div>
     </section>

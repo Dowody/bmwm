@@ -268,7 +268,7 @@ const TestimonialSection = () => {
         </div>
 
         {/* Stats Section with minimal red */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        {/* <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {[{
             value: '50,000+',
             label: 'Happy Customers'
@@ -292,7 +292,7 @@ const TestimonialSection = () => {
               <div className="w-8 h-0.5 bg-primary mx-auto mt-3 rounded-full opacity-0 group-hover:opacity-100 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300 origin-center"></div>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Minimal CTA Section */}
         {/* <div className="mt-12 flex justify-center">

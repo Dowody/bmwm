@@ -1,6 +1,7 @@
 import { FiInstagram, FiTwitter, FiFacebook, FiMail, FiPhone, FiArrowRight, FiMapPin } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { SiVisa, SiMastercard, SiPaypal } from 'react-icons/si';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -112,20 +113,13 @@ const Footer = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  {/* Commented out to keep navigation on homepage */}
-                  {/* <Link 
+                  <Link 
                     to={item.path} 
                     className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group"
                   >
                     <span className="w-1 h-1 bg-primary rounded-full mr-2 group-hover:w-2 transition-all duration-300"></span>
                     {item.label}
-                  </Link> */}
-                  <button 
-                    className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group w-full text-left"
-                  >
-                    <span className="w-1 h-1 bg-primary rounded-full mr-2 group-hover:w-2 transition-all duration-300"></span>
-                    {item.label}
-                  </button>
+                  </Link>
                 </motion.li>
               ))}
             </ul>
@@ -179,23 +173,12 @@ const Footer = () => {
               © {new Date().getFullYear()} PURE.BMWM. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              {/* Commented out to keep navigation on homepage */}
-              {/* <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors duration-300">
+              <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors duration-300">
                 Privacy Policy
               </Link>
               <Link to="/terms" className="text-gray-400 hover:text-white text-sm transition-colors duration-300">
                 Terms of Service
-              </Link> */}
-              <button 
-                className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
-              >
-                Privacy Policy
-              </button>
-              <button 
-                className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
-              >
-                Terms of Service
-              </button>
+              </Link>
             </div>
           </div>
           <div className="flex items-center space-x-6">

@@ -23,6 +23,19 @@ export interface Category {
   name: string;
   image: string;
   description: string;
+  carInfo?: {
+    model: string;
+    year: string;
+    engine: string;
+    horsepower: string;
+    topSpeed: string;
+    acceleration: string;
+    facts: string[];
+    history: string;
+    heroImage: string;
+    gallery: string[];
+  };
+  collectionProducts?: string[]; // Product IDs that belong to this collection
 }
 
 export interface CartItem {

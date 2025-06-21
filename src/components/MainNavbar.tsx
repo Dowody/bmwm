@@ -10,6 +10,7 @@ const MainNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const [isMobileCategoriesOpen, setIsMobileCategoriesOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
   const totalItems = useCartStore(state => state.getTotalItems());
@@ -44,9 +45,24 @@ const MainNavbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Add effect to close mobile menu on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMenuOpen]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Searching for:', searchQuery);
+    if (searchQuery.trim()) {
+      // Navigate to products page with search query
+      window.location.href = `/bmwm/products?search=${encodeURIComponent(searchQuery.trim())}`;
+    }
   };
 
   const isActive = (path: string) => {
@@ -83,23 +99,22 @@ const MainNavbar = () => {
           <div className="container mx-auto px-4 py-5">
             <div className="flex items-center justify-between">
               {/* Logo */}
-              {/* Commented out to keep navigation on homepage */}
-              {/* <Link to="/" className="flex items-center group"> */}
-              <div className={`flex items-center group cursor-pointer ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>
-                <div>
-                  <motion.h1 
-                    className={`text-3xl font-bold font-owned ${isDarkTheme ? 'text-white' : ''}`}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    PURE.<span className="text-primary group-hover:text-primary/80 transition-colors duration-300">BMWM</span>
-                  </motion.h1>
-                  <p className={`text-[0.85rem] font-owned font-medium tracking-wider ${isDarkTheme ? 'text-white/70' : 'text-gray-600'}`}>
-                    DREAM. BUY. BUILD.
-                  </p>
+              <Link to="/" className="flex items-center group">
+                <div className={`flex items-center group cursor-pointer ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>
+                  <div>
+                    <motion.h1 
+                      className={`text-3xl font-bold font-owned ${isDarkTheme ? 'text-white' : ''}`}
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      PURE.<span className="text-primary group-hover:text-primary/80 transition-colors duration-300">BMWM</span>
+                    </motion.h1>
+                    <p className={`text-[0.85rem] font-owned font-medium tracking-wider ${isDarkTheme ? 'text-white/70' : 'text-gray-600'}`}>
+                      DREAM. BUY. BUILD.
+                    </p>
+                  </div>
                 </div>
-              </div>
-              {/* </Link> */}
+              </Link>
 
               {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-8">
@@ -112,18 +127,13 @@ const MainNavbar = () => {
                     key={item.path}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    {/* Commented out to keep navigation on homepage */}
-                    {/* <Link 
+                    <Link 
                       to={item.path} 
-                      className={`font-medium relative ${isActive(item.path) ? 'text-primary' : 'hover:text-primary'}`}
-                    > */}
-                    <button 
                       className={`font-medium relative ${
                         isActive(item.path) 
                           ? 'text-primary' 
                           : (isDarkTheme ? 'text-white hover:text-primary' : 'text-gray-900 hover:text-primary')
                       }`}
-                      onClick={() => console.log(`${item.label} clicked`)}
                     >
                       {item.label}
                       {isActive(item.path) && (
@@ -133,8 +143,7 @@ const MainNavbar = () => {
                           transition={{ type: "spring", stiffness: 400, damping: 30 }}
                         />
                       )}
-                    </button>
-                    {/* </Link> */}
+                    </Link>
                   </motion.div>
                 ))}
                 <div 
@@ -173,26 +182,24 @@ const MainNavbar = () => {
                         <div className={`${
                           isDarkTheme ? 'bg-[#F9FAFB]' : 'bg-white'
                         } shadow-lg rounded-md py-2`}>
-                        {['Car T-Shirts', 'F1 Racing T-Shirts', 'Bike T-Shirts', 'Streetwear'].map((category, index) => (
+                        {['Car T-Shirts', 'F1 T-Shirts', 'Bike T-Shirts', 'Streetwear'].map((category, index) => (
                           <motion.div
                             key={category}
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.05 }}
                           >
-                            <button 
+                            <Link 
+                              to={`/products?category=${category.toLowerCase().replace(/\s+/g, '-')}`}
                               className={`block px-4 py-2 text-left w-full transition-colors duration-200 ${
                                 isDarkTheme 
                                   ? 'text-black hover:bg-gray-700 hover:text-white' 
                                   : 'text-gray-900 hover:bg-[#16171E]'
                               }`}
-                              onClick={() => {
-                                console.log(`${category} clicked`);
-                                setIsCategoriesOpen(false);
-                              }}
+                              onClick={() => setIsCategoriesOpen(false)}
                             >
                               {category}
-                            </button>
+                            </Link>
                           </motion.div>
                         ))}
                         </div>
@@ -247,7 +254,7 @@ const MainNavbar = () => {
                   {isDarkTheme ? <FiSun size={22} /> : <FiMoon size={22} />}
                 </motion.button>
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                  <button className={`${isDarkTheme ? 'text-white/70 hover:text-white' : 'text-gray-700 hover:text-primary'} relative`} onClick={() => console.log('Cart clicked')}>
+                  <Link to="/cart" className={`${isDarkTheme ? 'text-white/70 hover:text-white' : 'text-gray-700 hover:text-primary'} relative`}>
                     <PiShoppingCartSimpleBold size={22} className='relative top-0.5'/>
                     {totalItems > 0 && (
                       <motion.span 
@@ -259,23 +266,30 @@ const MainNavbar = () => {
                         {totalItems}
                       </motion.span>
                     )}
-                  </button>
+                  </Link>
                 </motion.div>
               </div>
 
               {/* Mobile Menu Button */}
               <div className="md:hidden flex items-center space-x-4">
-                <motion.button 
-                  onClick={toggleTheme}
-                  className={`${isDarkTheme ? 'text-white/70 hover:text-white' : 'text-gray-700 hover:text-primary'}`}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label={isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'}
-                >
-                  {isDarkTheme ? <FiSun size={22} /> : <FiMoon size={22} />}
-                </motion.button>
+                <AnimatePresence>
+                  {isMenuOpen && (
+                    <motion.button 
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      onClick={toggleTheme}
+                      className={`${isDarkTheme ? 'text-white/70 hover:text-white' : 'text-gray-700 hover:text-primary'}`}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label={isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'}
+                    >
+                      {isDarkTheme ? <FiSun size={22} /> : <FiMoon size={22} />}
+                    </motion.button>
+                  )}
+                </AnimatePresence>
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                  <button className={`${isDarkTheme ? 'text-white/70 hover:text-white' : 'text-gray-700 hover:text-primary'} relative`} onClick={() => console.log('Cart clicked')}>
+                  <Link to="/cart" className={`${isDarkTheme ? 'text-white/70 hover:text-white' : 'text-gray-700 hover:text-primary'} relative`}>
                     <PiShoppingCartSimpleBold size={22} className='relative top-0.5'/>
                     {totalItems > 0 && (
                       <motion.span 
@@ -287,7 +301,7 @@ const MainNavbar = () => {
                         {totalItems}
                       </motion.span>
                     )}
-                  </button>
+                  </Link>
                 </motion.div>
                 <motion.button 
                   onClick={toggleMenu} 
@@ -335,10 +349,10 @@ const MainNavbar = () => {
                     y: { duration: 0.25, ease: [0.4, 0, 0.2, 1] }
                   }}
                   style={{ overflow: 'hidden' }}
-                  className="md:hidden"
+                  className="md:hidden relative"
                 >
                   <motion.div 
-                    className="flex flex-col space-y-4 mt-4 mb-4"
+                    className="flex flex-col space-y-4 mt-4 mb-4 px-1"
                     initial={{ y: -20 }}
                     animate={{ y: 0 }}
                     exit={{ y: -20 }}
@@ -363,10 +377,11 @@ const MainNavbar = () => {
                           ease: [0.4, 0, 0.2, 1]
                         }}
                       >
-                        {/* Commented out to keep navigation on homepage */}
-                        {/* <Link 
+                        <Link 
                           to={item.path} 
-                          className={`font-medium block relative ${isActive(item.path) ? 'text-primary' : ''}`} 
+                          className={`font-medium block relative text-left w-full ${
+                            isDarkTheme ? 'text-gray-300 hover:text-white' : 'text-gray-900 hover:text-primary'
+                          }`} 
                           onClick={toggleMenu}
                         >
                           {item.label}
@@ -377,27 +392,10 @@ const MainNavbar = () => {
                               transition={{ type: "spring", stiffness: 400, damping: 30 }}
                             />
                           )}
-                        </Link> */}
-                        <button 
-                          className={`font-medium block relative text-left w-full ${
-                            isDarkTheme ? 'text-gray-300 hover:text-white' : 'text-gray-900 hover:text-primary'
-                          }`} 
-                          onClick={() => {
-                            console.log(`${item.label} clicked`);
-                            toggleMenu();
-                          }}
-                        >
-                          {item.label}
-                          {isActive(item.path) && (
-                            <motion.div
-                              layoutId="mobileActiveIndicator"
-                              className="absolute"
-                              transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                            />
-                          )}
-                        </button>
+                        </Link>
                       </motion.div>
                     ))}
+                    
                     <motion.div 
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -407,43 +405,132 @@ const MainNavbar = () => {
                         duration: 0.2,
                         ease: [0.4, 0, 0.2, 1]
                       }}
-                      className="space-y-2"
+                      className="space-y-0"
                     >
-                      <p className="font-medium">Categories</p>
-                      <div className="pl-4 space-y-2">
-                        {['Car T-Shirts', 'F1 Racing T-Shirts', 'Bike T-Shirts', 'Streetwear'].map((category, index) => (
-                          <motion.div
-                            key={category}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ 
-                              delay: 0.4 + index * 0.1,
-                              duration: 0.2,
-                              ease: [0.4, 0, 0.2, 1]
-                            }}
+                      <motion.button 
+                        onClick={() => setIsMobileCategoriesOpen(!isMobileCategoriesOpen)}
+                        className={`flex items-center justify-between w-full text-left ${isDarkTheme ? 'text-white hover:text-gray-300' : 'text-gray-900 hover:text-primary'}`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <span className="font-medium">Categories</span>
+                        <motion.div
+                          animate={{ rotate: isMobileCategoriesOpen ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                          </svg>
+                        </motion.div>
+                      </motion.button>
+                      
+                      <AnimatePresence>
+                        {isMobileCategoriesOpen && (
+                          <motion.div 
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                            className="overflow-hidden"
                           >
-                            {/* Commented out to keep navigation on homepage */}
-                            {/* <Link 
-                              to={`/products?category=${category.toLowerCase().replace(' ', '-')}`}
-                              className="block text-sm hover:text-primary transition-colors duration-200"
-                              onClick={toggleMenu}
-                            >
-                              {category}
-                            </Link> */}
-                            <button 
-                              className={`block text-sm hover:text-primary transition-colors duration-200 text-left w-full ${
-                                isDarkTheme ? 'text-gray-300 hover:text-white' : 'text-gray-900 hover:text-primary'
-                              }`}
-                              onClick={() => {
-                                console.log(`${category} clicked`);
-                                toggleMenu();
-                              }}
-                            >
-                              {category}
-                            </button>
+                            <div className="pl-4 space-y-2 pt-2">
+                              {['Car T-Shirts', 'F1 T-Shirts', 'Bike T-Shirts', 'Streetwear'].map((category, index) => (
+                                <motion.div
+                                  key={category}
+                                  initial={{ opacity: 0, x: -20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  exit={{ opacity: 0, x: -20 }}
+                                  transition={{ 
+                                    delay: index * 0.1,
+                                    duration: 0.2,
+                                    ease: [0.4, 0, 0.2, 1]
+                                  }}
+                                >
+                                  <Link 
+                                    to={`/products?category=${category.toLowerCase().replace(/\s+/g, '-')}`}
+                                    className={`block text-sm transition-colors duration-200 text-left w-full ${isDarkTheme ? 'text-gray-300 hover:text-white' : 'text-gray-900 hover:text-primary'}`}
+                                    onClick={() => {
+                                      setIsMobileCategoriesOpen(false);
+                                      toggleMenu();
+                                    }}
+                                  >
+                                    {category}
+                                  </Link>
+                                </motion.div>
+                              ))}
+                            </div>
                           </motion.div>
-                        ))}
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                    
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ 
+                        delay: 0.5,
+                        duration: 0.2,
+                        ease: [0.4, 0, 0.2, 1]
+                      }}
+                      className="pt-8 relative top-2 border-t border-gray-200 dark:border-gray-700"
+                    >
+                      <div className="space-y-3">
+                        {/* Mobile Search Bar */}
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ delay: 0.1, duration: 0.2 }}
+                          className="mb-4"
+                        >
+                          <motion.form 
+                            onSubmit={handleSearch} 
+                            className="relative"
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                          >
+                            <input
+                              type="text"
+                              placeholder="Search for products..."
+                              className={`backdrop-blur-md border border-gray-200/50 rounded-full py-3 pl-4 pr-12 w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 transition-all duration-300 ${
+                                isDarkTheme 
+                                  ? 'text-white placeholder-gray-400 border-gray-600/50 focus:border-gray-500/50 bg-gray-800/30' 
+                                  : 'text-gray-900 placeholder-gray-500 bg-gray-50/50'
+                              }`}
+                              value={searchQuery}
+                              onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <motion.button 
+                              type="submit" 
+                              className={`absolute right-3 top-1/2 transform -translate-y-1/2 ${
+                                isDarkTheme ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-primary'
+                              }`}
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <FiSearch size={18} />
+                            </motion.button>
+                          </motion.form>
+                        </motion.div>
+                        
+                        {/* Authentication Section */}
+                        <motion.button 
+                          className={`w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-full font-medium transition-all duration-200 ${
+                            isDarkTheme 
+                              ? 'bg-primary text-white hover:bg-primary/90' 
+                              : 'bg-primary text-white hover:bg-primary/90'
+                          }`}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            console.log('Login clicked');
+                            toggleMenu();
+                          }}
+                        >
+                          <FiUser size={16} />
+                          <span>Sign In</span>
+                        </motion.button>
                       </div>
                     </motion.div>
                   </motion.div>

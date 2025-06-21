@@ -1,135 +1,15 @@
 import { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useUIStore } from '../store/uiStore';
+import { categories } from '../data/categories';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const CategorySlider = () => {
   const { isDarkTheme } = useUIStore();
+  const navigate = useNavigate();
   const sliderRef = useRef<Slider>(null);
-  const sliderContainerRef = useRef<HTMLDivElement>(null);
-
-  // Add wheel scroll functionality for trackpad
-  useEffect(() => {
-    const container = sliderContainerRef.current;
-    if (!container) return;
-
-    let isThrottled = false;
-    const throttleDelay = 150; // ms between slide changes
-
-    const handleWheel = (e: WheelEvent) => {
-      // Throttle to prevent rapid firing
-      if (isThrottled) return;
-      
-      // Prevent default scroll behavior
-      e.preventDefault();
-      
-      // Handle horizontal scroll (trackpad swipe) or vertical scroll with shift key
-      const deltaX = e.deltaX;
-      const deltaY = e.deltaY;
-      
-      // If there's horizontal scroll or shift+vertical scroll
-      if (Math.abs(deltaX) > Math.abs(deltaY) || e.shiftKey) {
-        const scrollAmount = deltaX !== 0 ? deltaX : deltaY;
-        
-        // Only proceed if scroll amount is significant enough
-        if (Math.abs(scrollAmount) < 10) return;
-        
-        // Set throttle
-        isThrottled = true;
-        setTimeout(() => {
-          isThrottled = false;
-        }, throttleDelay);
-        
-        if (scrollAmount > 0) {
-          // Scroll right - next slide
-          nextSlide();
-        } else if (scrollAmount < 0) {
-          // Scroll left - previous slide
-          prevSlide();
-        }
-      }
-    };
-
-    container.addEventListener('wheel', handleWheel, { passive: false });
-
-    return () => {
-      container.removeEventListener('wheel', handleWheel);
-    };
-  }, []);
-
-  const categories = [
-    {
-      id: 'bmw-1',
-      name: 'BMW X6M COMPETITION',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'High-performance BMW vehicle'
-    },
-    {
-      id: 'bmw-2',
-      name: 'BMW X6M COMPETITION',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'High-performance BMW vehicle'
-    },
-    {
-      id: 'bmw-3',
-      name: 'BMW X6M COMPETITION',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'High-performance BMW vehicle'
-    },
-    {
-      id: 'bmw-4',
-      name: 'BMW X6M COMPETITION',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'High-performance BMW vehicle'
-    },
-    {
-      id: 'bmw-5',
-      name: 'BMW X6M COMPETITION',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'High-performance BMW vehicle'
-    },
-    {
-      id: 'upcoming-1',
-      name: 'UPCOMING',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'Coming soon - stay tuned'
-    },
-    {
-      id: 'upcoming-2',
-      name: 'UPCOMING',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'Coming soon - stay tuned'
-    },
-    {
-      id: 'upcoming-3',
-      name: 'UPCOMING',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'Coming soon - stay tuned'
-    },
-    {
-      id: 'upcoming-4',
-      name: 'UPCOMING',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'Coming soon - stay tuned'
-    },
-    {
-      id: 'upcoming-5',
-      name: 'UPCOMING',
-      image: 'assets/categories/collection-1.jpg',
-      backImage: 'assets/categories/collection-1-back.jpg',
-      description: 'Coming soon - stay tuned'
-    }
-  ];
 
   const nextSlide = () => {
     if (sliderRef.current) {
@@ -141,6 +21,10 @@ const CategorySlider = () => {
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
     }
+  };
+
+  const handleCategoryClick = (categoryId: string) => {
+    navigate(`/category/${categoryId}`);
   };
 
   const CategoryCard = ({ category, idx }: { category: any; idx: number }) => {
@@ -226,7 +110,7 @@ const CategorySlider = () => {
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            onClick={() => console.log(`${category.name} clicked`)}
+            onClick={() => handleCategoryClick(category.id)}
           >
             {/* Inner container to maintain circular boundary */}
             <div className="absolute inset-0 rounded-full overflow-hidden">
@@ -241,7 +125,7 @@ const CategorySlider = () => {
               />
               {/* Back Image */}
               <img
-                src={category.backImage}
+                src={category.carInfo?.gallery?.[2] || category.image}
                 alt={`${category.name} back`}
                 className={`w-full h-full object-cover transition-opacity duration-500 absolute inset-0 ${
                   showBackImage ? 'opacity-100' : 'opacity-0'
@@ -326,7 +210,7 @@ const CategorySlider = () => {
   return (
     <div className="py-8">
       {/* Category Slider */}
-      <div ref={sliderContainerRef} className="overflow-visible">
+      <div className="overflow-visible">
         <Slider ref={sliderRef} {...sliderSettings} className="category-slider overflow-visible">
           {displayCategories.map((category, idx) => (
             <CategoryCard key={`${category.id}-${idx}`} category={category} idx={idx} />

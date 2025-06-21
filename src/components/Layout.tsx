@@ -3,13 +3,15 @@ import HeroNavbar from './HeroNavbar';
 import MainNavbar from './MainNavbar';
 import GeneralNavBar from './GeneralNavBar';
 import Footer from './Footer';
+import { useUIStore } from '../store/uiStore';
 
 const Layout = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const { isDarkTheme } = useUIStore();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={`flex flex-col min-h-screen overflow-x-hidden ${isDarkTheme ? 'bg-[#16171E]' : 'bg-white'}`}>
       {isHomePage ? (
         <>
           <HeroNavbar />

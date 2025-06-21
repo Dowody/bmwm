@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Hero from '../components/Hero';
 import LimitedDrops from '../components/LimitedDrops';
 import InfoRoller from '../components/InfoRoller';
@@ -13,6 +14,11 @@ import { getFeaturedProducts, getBestSellerProducts } from '../data/products';
 const HomePage = () => {
   const featuredProducts = getFeaturedProducts();
   const bestSellerProducts = getBestSellerProducts();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>

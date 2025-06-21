@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUIStore } from '../store/uiStore';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -6,6 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const CategorySection = () => {
   const { isDarkTheme } = useUIStore();
+  const navigate = useNavigate();
   const sliderRef = useRef<Slider>(null);
   const sliderContainerRef = useRef<HTMLDivElement>(null);
 
@@ -228,7 +230,12 @@ const CategorySection = () => {
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            onClick={() => console.log(`${category.name} clicked`)}
+            onClick={() => {
+              if (idx < 5) {
+                // Navigate to products page for available categories
+                navigate('/products');
+              }
+            }}
           >
             {/* Inner container to maintain circular boundary */}
             <div className="absolute inset-0 rounded-full overflow-hidden">
@@ -294,7 +301,7 @@ const CategorySection = () => {
     pauseOnHover: true,
     pauseOnFocus: true,
     swipe: true,
-    swipeToSlide: true,
+    swipeToSlide: false,
     touchMove: true,
     draggable: true,
     responsive: [

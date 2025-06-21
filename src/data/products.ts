@@ -138,6 +138,78 @@ export const products: Product[] = [
     bestSeller: true,
     stock: 55,
   },
+  // BMW X6M Competition Collection
+  {
+    id: 'bmw-x6m-tshirt-1',
+    name: 'BMW X6M Competition T-Shirt',
+    description: 'Premium cotton t-shirt featuring the powerful BMW X6M Competition design. High-quality print with technical specifications.',
+    price: 44.99,
+    originalPrice: 64.99,
+    images: ['/assets/products/e30_3.jpg', '/assets/products/e30_2.jpg'],
+    category: 'BMW X6M COMPETITION',
+    tags: ['bmw', 'x6m', 'competition', 'suv', 'performance'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [
+      { name: 'Black', value: '#000000' },
+      { name: 'White', value: '#ffffff' },
+    ],
+    featured: true,
+    bestSeller: true,
+    stock: 85,
+  },
+  {
+    id: 'bmw-x6m-hoodie-1',
+    name: 'BMW X6M Competition Hoodie',
+    description: 'Premium cotton hoodie featuring the BMW X6M Competition design. Perfect for showing your passion for performance SUVs.',
+    price: 69.99,
+    originalPrice: 89.99,
+    images: ['/assets/products/e30_2.jpg', '/assets/products/e30_3.jpg'],
+    category: 'BMW X6M COMPETITION',
+    tags: ['bmw', 'x6m', 'competition', 'hoodie', 'performance'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [
+      { name: 'Black', value: '#000000' },
+      { name: 'Navy', value: '#000080' },
+    ],
+    featured: true,
+    stock: 60,
+  },
+  {
+    id: 'bmw-x6m-cap-1',
+    name: 'BMW X6M Competition Cap',
+    description: 'Stylish cap featuring the BMW X6M Competition logo. Adjustable fit with embroidered design.',
+    price: 29.99,
+    originalPrice: 39.99,
+    images: ['/assets/products/e30_3.jpg', '/assets/products/e30.png'],
+    category: 'BMW X6M COMPETITION',
+    tags: ['bmw', 'x6m', 'competition', 'cap', 'accessory'],
+    sizes: ['One Size'],
+    colors: [
+      { name: 'Black', value: '#000000' },
+      { name: 'White', value: '#ffffff' },
+    ],
+    stock: 100,
+  },
+  // BMW M3 Competition Collection
+  {
+    id: 'bmw-m3-tshirt-1',
+    name: 'BMW M3 Competition T-Shirt',
+    description: 'Premium cotton t-shirt featuring the legendary BMW M3 Competition design. High-quality print with racing heritage.',
+    price: 44.99,
+    originalPrice: 64.99,
+    images: ['/assets/products/e30.png', '/assets/products/e30_2.jpg'],
+    category: 'BMW M3 COMPETITION',
+    tags: ['bmw', 'm3', 'competition', 'racing', 'sedan'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [
+      { name: 'Black', value: '#000000' },
+      { name: 'White', value: '#ffffff' },
+    ],
+    featured: true,
+    bestSeller: true,
+    stock: 90,
+  },
+  
 ];
 
 export const getProductById = (id: string): Product | undefined => {

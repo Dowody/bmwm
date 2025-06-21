@@ -10,6 +10,6 @@ interface UIState {
 export const useUIStore = create<UIState>((set) => ({
   isContentVisible: false,
   setContentVisible: (visible) => set({ isContentVisible: visible }),
-  isDarkTheme: false,
+  isDarkTheme: true,
   toggleTheme: () => set((state) => ({ isDarkTheme: !state.isDarkTheme })),
 })); 

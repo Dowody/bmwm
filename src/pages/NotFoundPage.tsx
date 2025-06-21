@@ -1,6 +1,13 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const NotFoundPage = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="container mx-auto px-4 py-16 text-center">
       <div className="max-w-md mx-auto">

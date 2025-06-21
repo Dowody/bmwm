@@ -48,19 +48,12 @@ const SaleBanner = () => {
             <p className="text-xl md:text-2xl mb-8 text-gray-300 font-medium">
               Don't miss out on <span className="text-red-400 font-bold">40% OFF</span> all products!
             </p>
-            {/* Commented out to keep navigation on homepage */}
-            {/* <Link
+            <Link
               to="/products"
               className="inline-block bg-white hover:bg-gray-100 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 hover:shadow-lg transform hover:scale-105"
             >
               SHOP SALE NOW
-            </Link> */}
-            <button
-              className="inline-block bg-white hover:bg-gray-100 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 hover:shadow-lg transform hover:scale-105"
-              onClick={() => console.log('Shop Sale Now clicked')}
-            >
-              SHOP SALE NOW
-            </button>
+            </Link>
           </div>
           
           {/* Countdown */}

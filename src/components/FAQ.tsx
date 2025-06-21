@@ -161,22 +161,24 @@ const FAQ = () => {
             Our support squad is always ready to help! Hit us up and we'll get back to you faster than a BMW M3 on the Autobahn.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button
+            <a
+              href="mailto:support@purebmwm.com"
               className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg transform hover:scale-105"
-              onClick={() => console.log('Contact support clicked')}
             >
               Contact Support
-            </button>
-            <button
+            </a>
+            <a
+              href="https://instagram.com/purebmwm"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`font-bold py-3 px-8 rounded-full border transition-all duration-300 ${
                 isDarkTheme
                   ? 'bg-[#23242a] text-white border-gray-700 hover:bg-gray-800 hover:border-gray-600'
                   : 'bg-white hover:bg-gray-50 text-gray-900 border-gray-300 hover:border-gray-400'
               }`}
-              onClick={() => console.log('Instagram clicked')}
             >
               DM us on Instagram
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>

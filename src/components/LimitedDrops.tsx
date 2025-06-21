@@ -130,9 +130,7 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Commented out to keep navigation on homepage */}
-          {/* <Link to={`/products/${product.id}`} className="block w-full h-full relative overflow-hidden rounded-2xl"> */}
-          <div className="block w-full h-full relative overflow-hidden rounded-2xl cursor-pointer">
+          <Link to={`/products/${product.id}`} className="block w-full h-full relative overflow-hidden rounded-2xl">
             {/* Front Image */}
             <img
               src={frontImage}
@@ -151,8 +149,7 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
               }`}
               loading="lazy"
             />
-          </div>
-          {/* </Link> */}
+          </Link>
           
           {/* Cart Button - appears on hover - outside Link to avoid conflicts */}
           <div className={`absolute top-4 right-4 z-10 transition-all duration-300 ${
@@ -223,8 +220,6 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
             </div>
           </div>
           
-          {/* Commented out to keep navigation on homepage */}
-          {/* <Link to={`/products/${product.id}`} className="block"> */}
           <div className="block cursor-pointer">
             <div className="flex items-center justify-between">
               <h3 className={`font-bold text-lg transition-colors truncate ${
@@ -234,13 +229,13 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
               </h3>
               
               {/* Redesigned button positioned next to title */}
-              <button
+              <Link
+                to={`/products/${product.id}`}
                 className={`group relative inline-flex items-center justify-center px-4 py-1.5 text-xs font-medium transition-all duration-300 ease-out rounded-full overflow-hidden ${
                   isDarkTheme 
                     ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40' 
                     : 'bg-gray-900/5 hover:bg-gray-900/10 text-gray-700 border border-gray-200 hover:border-gray-300'
                 }`}
-                onClick={() => console.log('View Details clicked for:', product.name)}
               >
                 <span className="relative z-10 flex items-center space-x-1">
                   <span>View Details</span>
@@ -253,10 +248,9 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
-          {/* </Link> */}
           
           <div className="flex items-center justify-between">
             {/* Price section removed */}
@@ -269,7 +263,6 @@ const ProductCard = ({ product, idx }: { product: any; idx: number }) => {
 
 const LimitedDrops = () => {
   const { isDarkTheme } = useUIStore();
-  const sliderContainerRef = useRef<HTMLDivElement>(null);
   
   let newProducts = getNewProducts(8);
   if (newProducts.length < 8) {
@@ -277,55 +270,6 @@ const LimitedDrops = () => {
   }
 
   const sliderRef = useRef<Slider>(null);
-  
-  // Add wheel scroll functionality for trackpad
-  useEffect(() => {
-    const container = sliderContainerRef.current;
-    if (!container) return;
-
-    let isThrottled = false;
-    const throttleDelay = 150; // ms between slide changes
-
-    const handleWheel = (e: WheelEvent) => {
-      // Throttle to prevent rapid firing
-      if (isThrottled) return;
-      
-      // Prevent default scroll behavior
-      e.preventDefault();
-      
-      // Handle horizontal scroll (trackpad swipe) or vertical scroll with shift key
-      const deltaX = e.deltaX;
-      const deltaY = e.deltaY;
-      
-      // If there's horizontal scroll or shift+vertical scroll
-      if (Math.abs(deltaX) > Math.abs(deltaY) || e.shiftKey) {
-        const scrollAmount = deltaX !== 0 ? deltaX : deltaY;
-        
-        // Only proceed if scroll amount is significant enough
-        if (Math.abs(scrollAmount) < 10) return;
-        
-        // Set throttle
-        isThrottled = true;
-        setTimeout(() => {
-          isThrottled = false;
-        }, throttleDelay);
-        
-        if (scrollAmount > 0) {
-          // Scroll right - next slide
-          sliderRef.current?.slickNext();
-        } else if (scrollAmount < 0) {
-          // Scroll left - previous slide
-          sliderRef.current?.slickPrev();
-        }
-      }
-    };
-
-    container.addEventListener('wheel', handleWheel, { passive: false });
-
-    return () => {
-      container.removeEventListener('wheel', handleWheel);
-    };
-  }, []);
   
   const sliderSettings = {
     dots: false,
@@ -338,7 +282,7 @@ const LimitedDrops = () => {
     autoplaySpeed: 3000,
     pauseOnHover: true,
     swipe: true,
-    swipeToSlide: true,
+    swipeToSlide: false,
     touchMove: true,
     draggable: true,
     responsive: [
@@ -420,7 +364,7 @@ const LimitedDrops = () => {
         
       
         
-        <div ref={sliderContainerRef} className="overflow-visible">
+        <div className="overflow-visible">
           <Slider ref={sliderRef} {...sliderSettings} className="editorial-slider overflow-visible">
             {newProducts.map((product, idx) => (
               <ProductCard key={idx} product={product} idx={idx} />
@@ -428,11 +372,13 @@ const LimitedDrops = () => {
           </Slider>
         </div>
 
-        {/* Minimal CTA Section - commented out to keep navigation on homepage */}
-        {/* <div className="mt-12 flex justify-center">
+        {/* Minimal CTA Section */}
+        <div className="mt-12 flex justify-center">
           <Link
             to="/products"
-            className="group inline-flex items-center space-x-2 text-gray-700 hover:text-primary font-medium transition-colors duration-200"
+            className={`group inline-flex items-center space-x-2 hover:text-primary font-medium transition-colors duration-200 ${
+              isDarkTheme ? 'text-gray-300' : 'text-gray-700'
+            }`}
           >
             <span className="text-lg tracking-wide">View All Products</span>
             <svg 
@@ -444,24 +390,6 @@ const LimitedDrops = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
-        </div> */}
-        <div className="mt-12 flex justify-center">
-          <button
-            className={`group inline-flex items-center space-x-2 font-medium transition-colors duration-200 hover:text-primary ${
-              isDarkTheme ? 'text-gray-300' : 'text-gray-700'
-            }`}
-            onClick={() => console.log('View All Products clicked')}
-          >
-            <span className="text-lg tracking-wide">View All Products</span>
-            <svg 
-              className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-200" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </button>
         </div>
       </div>
     </section>

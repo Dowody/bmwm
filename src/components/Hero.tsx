@@ -2,6 +2,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { FaInstagram, FaFacebook, FaTiktok } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { useUIStore } from '../store/uiStore';
 import Announcement from './Announcement';
 
@@ -105,7 +106,10 @@ const Hero = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Searching for:', searchQuery);
+    if (searchQuery.trim()) {
+      // Navigate to products page with search query
+      window.location.href = `/bmwm/products?search=${encodeURIComponent(searchQuery.trim())}`;
+    }
   };
 
   return (
@@ -120,7 +124,7 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
-        className="absolute inset-0 w-full h-full object-cover opacity-50 scale-150 md:scale-125"
+        className="absolute inset-0 w-full h-full object-cover opacity-50 scale-150 md:scale-13 5"
         >
         <source src="videoplayback.mp4" type="video/mp4" />
         Your browser does not support the video tag.
@@ -132,7 +136,7 @@ const Hero = () => {
       {/* Mobile Search Bar - Moved to top */}
       <motion.form 
         onSubmit={handleSearch} 
-        className="relative w-full px-4 py-4 md:hidden z-20 pt-5 top-32"
+        className="relative w-full px-4 py-4 md:hidden z-20 pt-5 top-[130px]"
         initial={{ opacity: 0, y: -20 }}
         animate={controls}
         transition={{ delay: 0.2, duration: 0.5 }}
@@ -169,7 +173,7 @@ const Hero = () => {
 
       <button
         onClick={handleToggleMute}
-        className="absolute z-20 bottom-10 right-6 lg:right-12 bg-black bg-opacity-60 text-white p-3 rounded-full shadow-lg opacity-50 hover:opacity-80 transition"
+        className="absolute z-20 bottom-10 lg:bottom-16 right-6 lg:right-12 bg-black bg-opacity-60 text-white p-3 rounded-full shadow-lg opacity-50 hover:opacity-80 transition"
         aria-label={isMuted ? 'Unmute video' : 'Mute video'}
       >
         {isMuted ? (
@@ -182,7 +186,7 @@ const Hero = () => {
       </button>
 
       {/* Social Media Icons */}
-      <div className="absolute z-20 bottom-10 left-6 lg:left-12 flex space-x-3">
+      <div className="absolute z-20 bottom-10 lg:bottom-16 left-6 lg:left-12 flex space-x-3">
         <a
           href="https://instagram.com"
           target="_blank"
@@ -212,18 +216,17 @@ const Hero = () => {
         </a>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-[32vh] below400:py-[30vh] below385:py-[28vh] lg:py-[30vh] top-0 lg:top-10">
+      <div className="relative z-10 container mx-auto px-4 py-[27.9vh] below400:py-[26vh] below385:py-[20vh] lg:py-[42vh] top-0 lg:top-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={controls}
           transition={{ duration: 0.5 }}
           className="text-center relative bottom-20 top-0 lg:bottom-0"
         >
-          <h1 className="text-4xl md:text-7xl font-bold mb-4 font-bebasneue">Welcome to PURE.BMWM</h1>
+          <h1 className="text-4xl md:text-7xl font-bold mb-4 font-bebasneue">Welcome to <span className="font-owned text-7xl ml-2 relative top-2 lg:top-0 below400:text-6xl">PURE.<span className="text-primary">BMWM</span></span></h1>
           <p className="text-xl mb-8">Discover the latest in car-inspired merch.</p>
           <div className="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center items-center">
-            {/* Commented out to keep navigation on homepage */}
-            {/* <Link
+            <Link
               to="/products"
               className="bg-primary hover:bg-primary-dark text-white font-bold py-3 w-[300px] lg:py-3 lg:w-auto lg:px-8 rounded-full transition duration-300 text-center"
             >
@@ -231,22 +234,10 @@ const Hero = () => {
             </Link>
             <Link
               to="/about"
-              className="bg-transparent border-2 border-white text-white font-bold py-3 w-[300px] lg:py-3 lg:w-auto lg:px-8 rounded-full hover:bg-white hover:text-black transition duration-300 text-center"
+              className="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white font-bold py-3 w-[300px] lg:py-3 lg:w-auto lg:px-8 rounded-full hover:bg-white/20 hover:border-white/50 hover:backdrop-blur-lg transition-all duration-300 text-center shadow-lg"
             >
               LEARN MORE
-            </Link> */}
-            <button
-              className="bg-primary hover:bg-primary-dark text-white font-bold py-3 w-[300px] lg:py-3 lg:w-auto lg:px-8 rounded-full transition duration-300 text-center"
-              onClick={() => console.log('Shop Now clicked')}
-            >
-              SHOP NOW
-            </button>
-            <button
-              className="bg-transparent border-2 border-white text-white font-bold py-3 w-[300px] lg:py-3 lg:w-auto lg:px-8 rounded-full hover:bg-white hover:text-black transition duration-300 text-center"
-              onClick={() => console.log('Learn More clicked')}
-            >
-              LEARN MORE
-            </button>
+            </Link>
           </div>
         </motion.div>
       </div>
