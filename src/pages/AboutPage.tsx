@@ -71,7 +71,7 @@ const AboutPage = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: "url('/assets/bg2.jpg')"
+            backgroundImage: "url('assets/bg2.jpg')"
           }}
         />
         <div className="absolute inset-0 bg-black/50"></div>
@@ -134,7 +134,7 @@ const AboutPage = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed opacity-20"
           style={{
-            backgroundImage: "url('/assets/bg3.jpg')"
+            backgroundImage: "url('assets/bg3.jpg')"
           }}
         />
         <div className="absolute inset-0 bg-black/40"></div>
@@ -190,11 +190,11 @@ const AboutPage = () => {
             >
               <div className="bg-white/5 backdrop-blur-md rounded-2xl p-2 border border-white/10">
                 <img 
-                  src="/assets/about-image.jpg" 
+                  src="assets/about-image.jpg" 
                   alt="PURE.BMWM Team" 
                   className="rounded-xl w-full h-[500px] object-cover"
                   onError={(e) => {
-                    e.currentTarget.src = '/assets/bg4.jpg';
+                    e.currentTarget.src = 'assets/bg4.jpg';
                   }}
                 />
               </div>
@@ -342,7 +342,7 @@ const AboutPage = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: "url('/assets/bg2.jpg')"
+            backgroundImage: "url('assets/bg2.jpg')"
           }}
         />
         <div className="absolute inset-0 bg-black/60"></div>

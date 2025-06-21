@@ -150,7 +150,7 @@ const ProductDetailPage = () => {
       <div 
         className="relative min-h-screen bg-cover bg-center bg-fixed"
         style={{
-          backgroundImage: "url('/assets/categories/cars/x6m/bmw-x6m-competition-4.jpg')"
+          backgroundImage: "url('assets/categories/cars/x6m/bmw-x6m-competition-4.jpg')"
         }}
       >
         <div className="absolute inset-0 bg-black/80"></div>

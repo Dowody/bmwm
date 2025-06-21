@@ -123,7 +123,7 @@ const ContactPage = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: "url('/assets/bg3.jpg')",
+            backgroundImage: "url('assets/bg3.jpg')",
             backgroundPosition: "center -1400px",
                   }}
         />
@@ -222,7 +222,7 @@ const ContactPage = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed opacity-15"
           style={{
-            backgroundImage: "url('/assets/bg1.jpg')"
+            backgroundImage: "url('assets/bg1.jpg')"
           }}
         />
         <div className="absolute inset-0 bg-black/60"></div>
@@ -426,7 +426,7 @@ const ContactPage = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: "url('/assets/bg2.jpg')"
+            backgroundImage: "url('assets/bg2.jpg')"
           }}
         />
         <div className="absolute inset-0 bg-black/70"></div>

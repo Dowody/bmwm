@@ -61,7 +61,7 @@ const CartPage = () => {
         <div 
           className="relative min-h-screen bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: "url('/assets/bg1.jpg')"
+            backgroundImage: "url('assets/bg1.jpg')"
           }}
         >
           <div className="absolute inset-0 bg-black/70"></div>
@@ -126,7 +126,7 @@ const CartPage = () => {
       <div 
         className="relative min-h-screen bg-cover bg-center bg-fixed"
         style={{
-          backgroundImage: "url('/assets/bg1.jpg')"
+          backgroundImage: "url('assets/bg1.jpg')"
         }}
       >
         <div className="absolute inset-0 bg-black/70"></div>

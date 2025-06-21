@@ -95,7 +95,7 @@ const CategoryPage = () => {
             <motion.div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{ 
-                backgroundImage: 'url(/assets/bg3.jpg)', 
+                backgroundImage: 'url(assets/bg3.jpg)', 
                 backgroundPosition: 'center center',
                 backgroundSize: 'cover',
                 }}
@@ -121,7 +121,7 @@ const CategoryPage = () => {
             {/* Background Image */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <motion.img
-                    src={'/assets/categories/cars/x6m/bmw-x6m-competition-4.jpg'}                    alt={category.name}
+                    src={'assets/categories/cars/x6m/bmw-x6m-competition-4.jpg'}                    alt={category.name}
                     className="absolute top-0 left-0 w-full h-[100%] object-cover"
                     style={{ y: backgroundY }}
                 />

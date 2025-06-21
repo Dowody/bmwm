@@ -146,7 +146,7 @@ const CheckoutPage = () => {
         <div 
           className="relative min-h-screen bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: "url('/assets/categories/cars/x6m/bmw-x6m-competition-2.jpg')"
+            backgroundImage: "url('assets/categories/cars/x6m/bmw-x6m-competition-2.jpg')"
           }}
         >
           <div className="absolute inset-0 bg-black/80"></div>
@@ -220,7 +220,7 @@ const CheckoutPage = () => {
       <div 
         className="relative min-h-screen bg-cover bg-center bg-fixed"
         style={{
-          backgroundImage: "url('/assets/bg1.jpg')"
+          backgroundImage: "url('assets/bg1.jpg')"
         }}
       >
         <div className="absolute inset-0 bg-black/70"></div>
